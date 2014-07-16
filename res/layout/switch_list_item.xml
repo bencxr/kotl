@@ -1,0 +1,17 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:layout_width="fill_parent"
+  	android:layout_height="fill_parent"
+  	android:orientation="horizontal"
+	android:padding="10dp">
+
+	<Switch
+	    android:id="@+id/switch_button"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="Switch" 
+	    android:layout_alignParentRight="true"
+		android:layout_alignBottom="@+id/switch_name"
+	    android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+</RelativeLayout>
+	

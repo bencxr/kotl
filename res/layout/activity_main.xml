@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+	android:layout_height="match_parent" tools:context=".MainActivity" android:paddingLeft="15dp" android:paddingRight="8dp">
+
+	<LinearLayout
+	    android:id="@+id/linearLayout1"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignParentTop="true"
+	    android:orientation="vertical"
+	    android:padding="8dp" >
+
+		<TextView android:id="@+id/homeStateLabel"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="Home State" android:textAppearance="?android:attr/textAppearanceLarge" />
+
+		<RadioGroup android:id="@+id/radioState"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<RadioButton android:id="@+id/radioButton1"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="Home" android:onClick="clickHandler" />
+			<RadioButton android:id="@+id/radioButton2"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="Away" android:onClick="clickHandler" />
+			<RadioButton android:id="@+id/radioButton3"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="Custom" />
+		</RadioGroup>
+
+		<RelativeLayout
+		    android:id="@+id/RelativeLayout01"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center_vertical"
+		    android:paddingTop="8dp" >
+
+			<TextView
+			    android:id="@+id/temperatureLabel"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="Temperature"
+		        android:layout_alignParentLeft="true" 
+			    android:textAppearance="?android:attr/textAppearanceLarge"
+			    android:layout_gravity="center_vertical" />
+
+			<TextView
+			    android:id="@+id/setTemperatureLabel"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_alignBottom="@+id/temperatureLabel"
+			    android:layout_alignParentRight="true"
+			    android:text="68°c - 82°c"
+			    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		</RelativeLayout>
+		
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal" >
+
+		    <TextView
+		        android:id="@+id/minTempTextView"
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"
+		        android:layout_gravity="center_vertical"
+		        android:text="68"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		    <LinearLayout
+		        android:id="@+id/rangeSeekLayout"
+		        android:layout_width="300px"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:orientation="vertical" >
+
+		        <SeekBar
+		            android:id="@+id/seekBar1"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content" />
+		    </LinearLayout>
+
+		    <TextView
+		        android:id="@+id/maxTempTextView"
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"
+		        android:text="84"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+		</LinearLayout>
+
+		<TextView android:id="@+id/switchesLabel"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="Switches" android:textAppearance="?android:attr/textAppearanceLarge" 
+		    android:paddingTop="8dp" />
+		
+		<ListView
+		    android:id="@+id/switchListView"
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent" />
+
+	</LinearLayout>
+
+
+</RelativeLayout>

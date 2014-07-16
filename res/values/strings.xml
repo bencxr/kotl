@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <string name="app_name">LoveLights</string>
+    <string name="hello_world">Hello world!</string>
+    <string android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="home" name="home">Home</string>
+    <string android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="away" name="away">Away</string>
+    <string android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="custom" name="custom">Custom</string>
+    
+</resources>
