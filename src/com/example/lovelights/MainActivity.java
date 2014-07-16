@@ -58,13 +58,11 @@ public class MainActivity extends Activity {
         rangeSeekLayout.removeView(findViewById(R.id.seekBar1));
         rangeSeekLayout.addView(seekBar);
         
-        List<VeraSwitch> veraSwitches = new ArrayList<VeraSwitch>();
-        for(int i=0; i<30; i++) {
-            veraSwitches.add(new VeraSwitch("switch" + i, i % 2));	
-        }
+        VeraSwitchManager veraSwitchManager = new VeraSwitchManager(this);
+        veraSwitchManager.start();
         
         // set up list view
-        adapter = new SwitchListAdapter(this, R.layout.switch_list_item, veraSwitches);
+        adapter = new SwitchListAdapter(this, R.layout.switch_list_item, veraSwitchManager);
         ListView switchListView = (ListView)findViewById(R.id.switchListView);
         switchListView.setAdapter(adapter);
     }

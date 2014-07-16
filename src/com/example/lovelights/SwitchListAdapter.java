@@ -18,12 +18,12 @@ public class SwitchListAdapter extends ArrayAdapter<VeraSwitch> {
 	private int layoutResourceId;
 	private Context context;
 
-	public SwitchListAdapter(Context context, int layoutResourceId, List<VeraSwitch> items) {
+	public SwitchListAdapter(Context context, int layoutResourceId, VeraSwitchManager veraSwitchManager) {
 		
-		super(context, layoutResourceId, items);
+		super(context, layoutResourceId, veraSwitchManager);
 		this.layoutResourceId = layoutResourceId;
 		this.context = context;
-		this.items = items;
+		this.items = veraSwitchManager;
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class SwitchListAdapter extends ArrayAdapter<VeraSwitch> {
 	private void setupItem(SwitchHolder holder) {
 		
 		holder.switchButton.setText(holder.veraSwitch.getName());
-		holder.switchButton.setChecked(holder.veraSwitch.getValue());
+		holder.switchButton.setChecked(holder.veraSwitch.getState() >= 1);
 	}
 
 	public static class SwitchHolder {

@@ -2,28 +2,29 @@ package com.example.lovelights;
 
 public class VeraSwitch {
 	
-	private boolean value = false;
+	private int id;
 	private String name = "Switch";
+	private String room;
+	private int state;
 	
-	public VeraSwitch(String name, int value) {
+	public VeraSwitch(String name, int state) {
 		
-		this.value = (value >= 1);
+		this.state = state;
 		this.name = name;
 	}
 	
-	public VeraSwitch(String name, boolean value) {
+	public int getState() {
 		
-		this.value = value;
-		this.name = name;
-	}
-
-	public boolean getValue() {
-		
-		return this.value;
+		return this.state;
 	}
 
 	public String getName() {
 
-		return this.name + Math.random();
+		return this.name;
+	}
+	
+	public String toString() {
+		
+		return "VeraSwitch id: " + this.id + ", name: " + this.name + ", state: " + this.state; 
 	}
 }
