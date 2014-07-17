@@ -26,13 +26,14 @@ public class MainActivity extends Activity {
 	Integer maxTemp = 82;
 	SwitchListAdapter adapter;
 	
-	Activity mActivity;
+	private static MainActivity singleton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        singleton = this;
+        
         setContentView(R.layout.activity_main);
-        mActivity = this;
         
         TextView minTempTextView = (TextView)findViewById(R.id.minTempTextView);
         minTempTextView.setText(minTemp.toString());
@@ -67,6 +68,11 @@ public class MainActivity extends Activity {
         switchListView.setAdapter(adapter);
     }
     
+    // Returns the application instance 
+    public static MainActivity getInstance() {
+        return singleton;
+    }
+    
     public void clickHandler(View view) {
     	
     	if (view.getId() == R.id.radioButton2) {
@@ -80,7 +86,7 @@ public class MainActivity extends Activity {
 		        public void onClick(DialogInterface dialog, int which) { 
 		        	try {
 						new ApiRequest().execute(new URL("http://home.isidorechan.com:5000/lights/11"));
-						RadioButton r = (RadioButton)(mActivity.findViewById(R.id.radioButton1));
+						RadioButton r = (RadioButton)(MainActivity.getInstance().findViewById(R.id.radioButton1));
 						r.setText("abc");
 					} catch (MalformedURLException e) {
 						// TODO Auto-generated catch block

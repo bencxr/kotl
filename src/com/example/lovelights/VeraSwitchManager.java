@@ -7,9 +7,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -180,7 +182,7 @@ public class VeraSwitchManager extends Thread implements List<VeraSwitch> {
 		while (true) {
 			getLights();
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 			}
 		}
@@ -194,7 +196,7 @@ public class VeraSwitchManager extends Thread implements List<VeraSwitch> {
 			get.addHeader("Accept", "application/json");
 			HttpResponse response = client.execute(get);
 			
-		    // 200 type response.
+		    // 200 type response
 		    if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)
 		    {
 		    	InputStream content = response.getEntity().getContent();
@@ -206,10 +208,21 @@ public class VeraSwitchManager extends Thread implements List<VeraSwitch> {
 		    			.create();
 		    	VeraSwitch[] veraSwitches = gson.fromJson(reader, VeraSwitch[].class);
 		    	
-		    	this.list = new ArrayList<VeraSwitch>();
+		    	Map<Integer, VeraSwitch> switchMap = new HashMap<Integer, VeraSwitch>();
 		    	for (VeraSwitch veraSwitch: veraSwitches) {
-		    		this.list.add(veraSwitch);
+		    		switchMap.put(veraSwitch.getId(), veraSwitch);
 		    	}
+		    	
+		    	for (VeraSwitch veraSwitch: this.list){
+		    		
+		    		veraSwitch.setState(switchMap.get(veraSwitch.getId()).getState());
+		    		veraSwitch.setName(switchMap.get(veraSwitch.getId()).getName());
+		    		veraSwitch.setRoom(switchMap.get(veraSwitch.getId()).getRoom());
+		    		switchMap.remove(veraSwitch.getId());
+		    	}
+		    	
+		    	this.list.addAll(switchMap.values());
+		    	
 		    	activity.runOnUiThread(new Runnable() {
 		    	     @Override
 		    	     public void run() {

@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -26,17 +27,26 @@ public class SwitchListAdapter extends ArrayAdapter<VeraSwitch> {
 		this.items = veraSwitchManager;
 	}
 
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View row = convertView;
-		SwitchHolder holder = null;
 
 		LayoutInflater inflater = ((Activity) context).getLayoutInflater();
 		row = inflater.inflate(layoutResourceId, parent, false);
 
-		holder = new SwitchHolder();
+		final SwitchHolder holder = new SwitchHolder();
 		holder.veraSwitch = items.get(position);
 		holder.switchButton = (Switch)row.findViewById(R.id.switch_button);
+		holder.switchButton.setOnClickListener(new OnClickListener()
+	    {
+	        @Override
+	        public void onClick(View v)
+	        {
+	        	int requestedState = (holder.veraSwitch.getState() + 1) % 2;
+	        	holder.veraSwitch.setState(holder.switchButton, requestedState);	        
+	        }
+	    });
 
 		row.setTag(holder);
 
@@ -51,6 +61,7 @@ public class SwitchListAdapter extends ArrayAdapter<VeraSwitch> {
 	}
 
 	public static class SwitchHolder {
+		
 		VeraSwitch veraSwitch;
 		Switch switchButton;
 	}
