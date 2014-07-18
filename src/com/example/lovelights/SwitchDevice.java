@@ -21,9 +21,9 @@ import com.google.gson.reflect.TypeToken;
 
 import android.widget.Switch;
 
-public class VeraSwitch {
+public class SwitchDevice {
 	
-	private static final String BASE_SWITCH_URL = "http://home.isidorechan.com/lights/";
+	public static final String BASE_SWITCH_URL = "http://home.isidorechan.com/lights";
 
 	private int id;
 	private String name = "Switch";
@@ -32,7 +32,7 @@ public class VeraSwitch {
 	
 	private boolean stateLocked = false;
 	
-	public VeraSwitch(String name, int state) {
+	public SwitchDevice(String name, int state) {
 		
 		this.state = state;
 		this.name = name;
@@ -106,7 +106,7 @@ public class VeraSwitch {
 				
 					try {
 						for (int i=0; i<3; i++) {
-							String lightURL = BASE_SWITCH_URL + id;
+							String lightURL = BASE_SWITCH_URL + "/" + id;
 							HttpClient client = new DefaultHttpClient();
 							HttpPut put = new HttpPut(lightURL);
 							put.addHeader("Content-Type", "application/json");

@@ -294,7 +294,7 @@ int id search_mag_icon 0x7f050035
 int id search_plate 0x7f050036
 int id search_src_text 0x7f050037
 int id search_voice_btn 0x7f05003b
-int id seekBar1 0x7f050047
+int id seekBar 0x7f050047
 int id setTemperatureLabel 0x7f050044
 int id shortcut 0x7f05002e
 int id showCustom 0x7f050007

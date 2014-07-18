@@ -42,7 +42,7 @@
 			    android:id="@+id/temperatureLabel"
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
-			    android:text="Temperature"
+			    android:text="Air Conditioning"
 		        android:layout_alignParentLeft="true" 
 			    android:textAppearance="?android:attr/textAppearanceLarge"
 			    android:layout_gravity="center_vertical" />
@@ -61,14 +61,16 @@
 		<LinearLayout
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    android:orientation="horizontal" >
+		    android:orientation="horizontal"
+		    android:paddingLeft="2dp"
+		    android:paddingTop="3dp" >
 
 		    <TextView
 		        android:id="@+id/minTempTextView"
 		        android:layout_width="wrap_content"
-		        android:layout_height="match_parent"
+		        android:layout_height="wrap_content"
 		        android:layout_gravity="center_vertical"
-		        android:text="68"
+		        android:text="68°c"
 		        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 		    <LinearLayout
@@ -79,7 +81,7 @@
 		        android:orientation="vertical" >
 
 		        <SeekBar
-		            android:id="@+id/seekBar1"
+		            android:id="@+id/seekBar"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content" />
 		    </LinearLayout>
@@ -87,9 +89,11 @@
 		    <TextView
 		        android:id="@+id/maxTempTextView"
 		        android:layout_width="wrap_content"
-		        android:layout_height="match_parent"
-		        android:text="84"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="center_vertical"
+		        android:text="84°c"
 		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
 		</LinearLayout>
 
 		<TextView android:id="@+id/switchesLabel"

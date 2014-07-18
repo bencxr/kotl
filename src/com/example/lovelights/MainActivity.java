@@ -22,8 +22,6 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	
-	Integer minTemp = 68;
-	Integer maxTemp = 82;
 	SwitchListAdapter adapter;
 	
 	private static MainActivity singleton;
@@ -35,31 +33,11 @@ public class MainActivity extends Activity {
         
         setContentView(R.layout.activity_main);
         
-        TextView minTempTextView = (TextView)findViewById(R.id.minTempTextView);
-        minTempTextView.setText(minTemp.toString());
+        ThermostatManager themostatManager = new ThermostatManager(this);
+        themostatManager.start();
         
-        TextView maxTempTextView = (TextView)findViewById(R.id.maxTempTextView);
-        maxTempTextView.setText(maxTemp.toString());
-        
-        // create RangeSeekBar as Integer range between 20 and 75
-        RangeSeekBar<Integer> seekBar = new RangeSeekBar<Integer>(minTemp, maxTemp, getApplicationContext());
-        seekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
-                @Override
-                public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Integer minValue, Integer maxValue) {
-                	// handle changed range values
-                	TextView setTemperatureLabel = (TextView)findViewById(R.id.setTemperatureLabel);
-                	setTemperatureLabel.setText(minValue + "°c - " + maxValue + "°c");
-                }
-        });
-        seekBar.setNotifyWhileDragging(true);
-        seekBar.setSelectedCurrentValue(76);
-        
-        // add RangeSeekBar to pre-defined layout
-        ViewGroup rangeSeekLayout = (ViewGroup) findViewById(R.id.rangeSeekLayout);
-        rangeSeekLayout.removeView(findViewById(R.id.seekBar1));
-        rangeSeekLayout.addView(seekBar);
-        
-        VeraSwitchManager veraSwitchManager = new VeraSwitchManager(this);
+        // Switch manager to populate switch list view
+        SwitchDeviceManager veraSwitchManager = new SwitchDeviceManager(this);
         veraSwitchManager.start();
         
         // set up list view

@@ -19,7 +19,7 @@ public class ApiRequest extends AsyncTask<URL, Integer, Long>  {
 	private static final int CONNECT_TIMEOUT = 10;
 	public URL url;
 	int id = Integer.MAX_VALUE;
-	
+
 	public ApiRequest() {
 	}
 

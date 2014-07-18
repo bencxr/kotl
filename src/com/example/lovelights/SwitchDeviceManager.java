@@ -26,38 +26,37 @@ import android.os.AsyncTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class VeraSwitchManager extends Thread implements List<VeraSwitch> {
+public class SwitchDeviceManager extends Thread implements List<SwitchDevice> {
 	
-	private static final String BASE_LIGHT_URL = "http://home.isidorechan.com/lights";
-	List<VeraSwitch> list;
+	List<SwitchDevice> list;
 	MainActivity activity;
 	
-	public VeraSwitchManager(MainActivity activity) {
+	public SwitchDeviceManager(MainActivity activity) {
 		
-		this.list = new ArrayList<VeraSwitch>();
+		this.list = new ArrayList<SwitchDevice>();
 		this.activity = activity;
 	}
 
 	@Override
-	public boolean add(VeraSwitch object) {
+	public boolean add(SwitchDevice object) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void add(int location, VeraSwitch object) {
+	public void add(int location, SwitchDevice object) {
 		
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public boolean addAll(Collection<? extends VeraSwitch> arg0) {
+	public boolean addAll(Collection<? extends SwitchDevice> arg0) {
 		
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public boolean addAll(int arg0, Collection<? extends VeraSwitch> arg1) {
+	public boolean addAll(int arg0, Collection<? extends SwitchDevice> arg1) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -81,7 +80,7 @@ public class VeraSwitchManager extends Thread implements List<VeraSwitch> {
 	}
 
 	@Override
-	public VeraSwitch get(int location) {
+	public SwitchDevice get(int location) {
 
 		return this.list.get(location);
 	}
@@ -99,7 +98,7 @@ public class VeraSwitchManager extends Thread implements List<VeraSwitch> {
 	}
 
 	@Override
-	public Iterator<VeraSwitch> iterator() {
+	public Iterator<SwitchDevice> iterator() {
 
 		return this.list.iterator();
 	}
@@ -111,19 +110,19 @@ public class VeraSwitchManager extends Thread implements List<VeraSwitch> {
 	}
 
 	@Override
-	public ListIterator<VeraSwitch> listIterator() {
+	public ListIterator<SwitchDevice> listIterator() {
 		
 		return this.list.listIterator();
 	}
 
 	@Override
-	public ListIterator<VeraSwitch> listIterator(int location) {
+	public ListIterator<SwitchDevice> listIterator(int location) {
 		
 		return this.list.listIterator(location);
 	}
 
 	@Override
-	public VeraSwitch remove(int location) {
+	public SwitchDevice remove(int location) {
 		
 		throw new UnsupportedOperationException();
 	}
@@ -147,7 +146,7 @@ public class VeraSwitchManager extends Thread implements List<VeraSwitch> {
 	}
 
 	@Override
-	public VeraSwitch set(int location, VeraSwitch object) {
+	public SwitchDevice set(int location, SwitchDevice object) {
 		
 		throw new UnsupportedOperationException();
 	}
@@ -159,7 +158,7 @@ public class VeraSwitchManager extends Thread implements List<VeraSwitch> {
 	}
 
 	@Override
-	public List<VeraSwitch> subList(int start, int end) {
+	public List<SwitchDevice> subList(int start, int end) {
 		
 		return this.list.subList(start, end);
 	}
@@ -188,10 +187,10 @@ public class VeraSwitchManager extends Thread implements List<VeraSwitch> {
 		}
 	}
 	
-	private List<VeraSwitch> getLights() { 
+	private List<SwitchDevice> getLights() { 
 		try {
 			HttpClient client = new DefaultHttpClient();
-			HttpGet get = new HttpGet(BASE_LIGHT_URL);
+			HttpGet get = new HttpGet(SwitchDevice.BASE_SWITCH_URL);
 			get.addHeader("Content-Type", "application/json");
 			get.addHeader("Accept", "application/json");
 			HttpResponse response = client.execute(get);
@@ -203,17 +202,17 @@ public class VeraSwitchManager extends Thread implements List<VeraSwitch> {
 		    	Reader reader = new InputStreamReader(content);
 		    	
 		    	GsonBuilder builder = new GsonBuilder();
-		    	builder.registerTypeAdapter(VeraSwitch[].class, new VeraSwitchDeserializer());
+		    	builder.registerTypeAdapter(SwitchDevice[].class, new SwitchDeviceDeserializer());
 		    	Gson gson = builder.setFieldNamingPolicy(com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 		    			.create();
-		    	VeraSwitch[] veraSwitches = gson.fromJson(reader, VeraSwitch[].class);
+		    	SwitchDevice[] veraSwitches = gson.fromJson(reader, SwitchDevice[].class);
 		    	
-		    	Map<Integer, VeraSwitch> switchMap = new HashMap<Integer, VeraSwitch>();
-		    	for (VeraSwitch veraSwitch: veraSwitches) {
+		    	Map<Integer, SwitchDevice> switchMap = new HashMap<Integer, SwitchDevice>();
+		    	for (SwitchDevice veraSwitch: veraSwitches) {
 		    		switchMap.put(veraSwitch.getId(), veraSwitch);
 		    	}
 		    	
-		    	for (VeraSwitch veraSwitch: this.list){
+		    	for (SwitchDevice veraSwitch: this.list){
 		    		
 		    		veraSwitch.setState(switchMap.get(veraSwitch.getId()).getState());
 		    		veraSwitch.setName(switchMap.get(veraSwitch.getId()).getName());

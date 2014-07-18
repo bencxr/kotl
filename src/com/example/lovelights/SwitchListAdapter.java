@@ -13,13 +13,13 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
-public class SwitchListAdapter extends ArrayAdapter<VeraSwitch> {
+public class SwitchListAdapter extends ArrayAdapter<SwitchDevice> {
 	
-	private List<VeraSwitch> items;
+	private List<SwitchDevice> items;
 	private int layoutResourceId;
 	private Context context;
 
-	public SwitchListAdapter(Context context, int layoutResourceId, VeraSwitchManager veraSwitchManager) {
+	public SwitchListAdapter(Context context, int layoutResourceId, SwitchDeviceManager veraSwitchManager) {
 		
 		super(context, layoutResourceId, veraSwitchManager);
 		this.layoutResourceId = layoutResourceId;
@@ -62,7 +62,7 @@ public class SwitchListAdapter extends ArrayAdapter<VeraSwitch> {
 
 	public static class SwitchHolder {
 		
-		VeraSwitch veraSwitch;
+		SwitchDevice veraSwitch;
 		Switch switchButton;
 	}
 }

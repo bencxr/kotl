@@ -190,6 +190,7 @@ public class RangeSeekBar<T extends Number> extends ImageView {
          * @return The currently selected middle current value.
          */
         public T getSelectedCurrentValue() {
+        	
                 return normalizedToValue(normalizedCurrentValue);
         }
 
@@ -201,6 +202,7 @@ public class RangeSeekBar<T extends Number> extends ImageView {
          */
         public void setSelectedCurrentValue(T value) {
         	this.normalizedCurrentValue = valueToNormalized(value);
+            invalidate();
         }
         
         /**
