@@ -1,11 +1,29 @@
 package com.example.lovelights;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -72,25 +90,77 @@ public class MainActivity extends Activity {
         return mIsInForegroundMode;
     }
     
-    public void clickHandler(View view) {
+    public void saveStateHandler(View view) {
+
+    	RadioGroup radioState = (RadioGroup) findViewById(R.id.radioState);
+    	RadioButton r = (RadioButton) findViewById(radioState.getCheckedRadioButtonId());
+    	if (r == null) { return; }
     	
-    	if (view.getId() == R.id.radioButton2) {
-    		adapter.notifyDataSetChanged();
-    	} else {
-                
+    	final String selectedState = (String) r.getText();
+    	
+    	if (selectedState != null) {
 			new AlertDialog.Builder(this)
-		    .setTitle("Delete entry")
-		    .setMessage("It will go dark. ")
+		    .setTitle("Confirm State Override")
+		    .setMessage("Are you sure you want to save state for " + selectedState + "?")
 		    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 		        public void onClick(DialogInterface dialog, int which) { 
-		        	try {
-						new ApiRequest().execute(new URL("http://home.isidorechan.com:5000/lights/11"));
-						RadioButton r = (RadioButton)(MainActivity.getInstance().findViewById(R.id.radioButton1));
-						r.setText("abc");
-					} catch (MalformedURLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+		        	new Thread(new Runnable() {
+						public void run() {
+							try {
+								HttpClient client = new DefaultHttpClient();
+								HttpPut put = new HttpPut(BASE_URL + "/states/" + selectedState);
+								put.addHeader("Content-Type", "application/json");
+								put.addHeader("Accept", "application/json");
+								put.setEntity(new StringEntity("{ \"password\": \"iamal0ck\" }"));
+								HttpResponse response = client.execute(put);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+						}}).start();
+		        }
+		     })
+		    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int which) { 
+		            // do nothing
+		        }
+		     })
+		    .setIcon(android.R.drawable.ic_dialog_alert)
+		    .show();
+    	}
+    }
+
+    public void loadStateHandler(View view) {
+
+    	RadioGroup radioState = (RadioGroup) findViewById(R.id.radioState);
+    	RadioButton r = (RadioButton) findViewById(radioState.getCheckedRadioButtonId());
+    	if (r == null) { return; }
+    	
+    	final String selectedState = (String) r.getText();
+    	
+    	if (selectedState != null) {
+			new AlertDialog.Builder(this)
+		    .setTitle("Confirm house-wide state Load")
+		    .setMessage("Are you sure you want to load state " + selectedState + "?")
+		    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int which) { 
+		        	new Thread(new Runnable() {
+						public void run() {
+							
+							try {
+								HttpClient client = new DefaultHttpClient();
+								HttpPut put = new HttpPut(BASE_URL + "/states/load/" + selectedState);
+								put.addHeader("Content-Type", "application/json");
+								put.addHeader("Accept", "application/json");
+								put.setEntity(new StringEntity("{ \"password\": \"iamal0ck\" }"));
+								HttpResponse response = client.execute(put);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+						}}).start();
 		        }
 		     })
 		    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

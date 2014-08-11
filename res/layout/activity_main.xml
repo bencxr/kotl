@@ -12,31 +12,75 @@
 	    android:orientation="vertical"
 	    android:padding="8dp" >
 
-		<TextView android:id="@+id/homeStateLabel"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="Home State" android:textAppearance="?android:attr/textAppearanceLarge" />
-
-		<RadioGroup android:id="@+id/radioState"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:orientation="horizontal">
-
-			<RadioButton android:id="@+id/radioButton1"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:text="Home" android:onClick="clickHandler" />
-			<RadioButton android:id="@+id/radioButton2"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:text="Away" android:onClick="clickHandler" />
-			<RadioButton android:id="@+id/radioButton3"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:text="Custom" />
-		</RadioGroup>
-
 		<RelativeLayout
 		    android:id="@+id/RelativeLayout01"
 		    android:layout_width="match_parent"
+		    android:layout_height="34dp"
+		    android:layout_gravity="center_vertical"
+		    android:padding="0dp" >
+
+			<TextView
+			    android:id="@+id/homeStateLabel"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="States"
+		        android:layout_alignParentLeft="true" 
+			    android:textAppearance="?android:attr/textAppearanceLarge"
+			    android:layout_gravity="center_vertical"
+			    android:padding="2dp" />
+
+			<Button
+			    android:id="@+id/loadStateButton"
+			    style="?android:attr/buttonStyleSmall"
+			    android:layout_width="wrap_content"
+			    android:layout_height="31dp"
+			    android:layout_alignParentBottom="true"
+			    android:layout_alignParentRight="true"
+			    android:layout_alignParentTop="true"
+			    android:padding="0dp"
+			    android:onClick="loadStateHandler"
+			    android:text="Load" />
+
+			<Button
+			    android:id="@+id/saveStateButton"
+			    style="?android:attr/buttonStyleSmall"
+			    android:layout_width="wrap_content"
+			    android:layout_height="31dp"
+			    android:layout_alignParentBottom="true"
+			    android:layout_alignParentRight="true"
+			    android:layout_alignParentTop="true"
+			    android:layout_marginRight="45dp"
+			    android:padding="0dp"
+			    android:onClick="saveStateHandler"
+			    android:text="Save" />
+
+		</RelativeLayout>
+
+		<RadioGroup android:id="@+id/radioState"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:padding="0dp">
+
+			<RadioButton android:id="@+id/radioButton1"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="Home" 
+				android:padding="0dp" />
+			<RadioButton android:id="@+id/radioButton2"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="Away"  
+				android:padding="0dp"/>
+			<RadioButton android:id="@+id/radioButton3"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="Ben" 
+				android:padding="0dp" />
+		</RadioGroup>
+
+		<RelativeLayout
+		    android:id="@+id/RelativeLayout02"
+		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:layout_gravity="center_vertical"
-		    android:paddingTop="8dp" >
+		    android:paddingTop="4dp" >
 
 			<TextView
 			    android:id="@+id/temperatureLabel"
