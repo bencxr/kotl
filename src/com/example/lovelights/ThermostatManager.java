@@ -63,9 +63,12 @@ public class ThermostatManager extends Thread {
 	public void run() {
 		
 		while (true) {
-			getThermostat();
 			try {
-				Thread.sleep(5000);
+				if (activity.isInForeground()) {
+					getThermostat();
+					Thread.sleep(500);
+				}
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 			}
 		}
@@ -99,7 +102,7 @@ public class ThermostatManager extends Thread {
 		    	     @Override
 		    	     public void run() {
 
-		    	    	 if (!stateLocked) {
+		    	    	 if (stateLocked==0) {
 		    	    		 setTemperatureLabel.setText(nest.getCurrentTemperature() + "°c (" + nest.getMinTemp() + "°c - " + nest.getMaxTemp() + "°c)");
 		    	    		 seekBar.setSelectedMinValue(nest.getMinTemp());
 		    	    		 seekBar.setSelectedMaxValue(nest.getMaxTemp());
@@ -109,7 +112,12 @@ public class ThermostatManager extends Thread {
 		                        @Override
 		                        public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Integer minValue, Integer maxValue) {
 		                        	// handle changed range values
+		                        	System.out.println("cahgnged!!!");
+				    	    		seekBar.setSelectedMinValue(minValue);
+				    	    		seekBar.setSelectedMaxValue(maxValue);
 		                        	putThermostat(nest, minValue, maxValue);
+				    	    		setTemperatureLabel.setText(nest.getCurrentTemperature() 
+				    	    				+ "°c (" + minValue + "°c - " + maxValue + "°c)");
 		                        }
 		    	    	 });
 		    	    }
@@ -125,9 +133,10 @@ public class ThermostatManager extends Thread {
 		return;
 	}
 	
-	Boolean stateLocked = false;
+	int stateLocked = 0;
 	public void putThermostat(final Thermostat nest, final int minTemp, final int maxTemp) {
 		
+		/*
 		if (stateLocked) {
 			
 			return;
@@ -136,13 +145,14 @@ public class ThermostatManager extends Thread {
 			stateLocked = true;
 			this.minTemp = minTemp;
 			this.maxTemp = maxTemp;
-		}
-		
+		}*/
+
+		stateLocked++;
 		new Thread(new Runnable() {
 			public void run() {
 
 			try {
-				for (int i=0; i<3; i++) {
+				for (int i=0; i<1; i++) {
 					String thermostatURL = Thermostat.BASE_URL + "/" + nest.getId();
 					HttpClient client = new DefaultHttpClient();
 					HttpPut put = new HttpPut(thermostatURL);
@@ -163,7 +173,7 @@ public class ThermostatManager extends Thread {
 				    	
 				    	Map<String, String> map = 
 				    			new Gson().fromJson(reader, new TypeToken<HashMap<String, String>>() {}.getType());
-				    	if (map.containsKey("result") && map.get("result").equals("ok")) {
+				    	if (map.containsKey("result") && map.get("result").toLowerCase().equals("ok")) {
 				    		System.out.println("ok setting thermostat: " + map.toString());
 				    		break;
 				    	} else {
@@ -187,7 +197,7 @@ public class ThermostatManager extends Thread {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
-				stateLocked = false;
+				stateLocked--;
 			}
 			}}).start();
 	}

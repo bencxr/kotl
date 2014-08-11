@@ -23,12 +23,12 @@ import android.widget.Switch;
 
 public class Thermostat {
 	
-	public static final String BASE_URL = "http://home.isidorechan.com/nests";
+	public static final String BASE_URL = MainActivity.BASE_URL + "/nests";
 
 	protected int id;
 	protected int minTemp;
 	protected int maxTemp;
-	protected int currentTemperature;
+	protected int currentTemp;
 	protected String name = "Switch";
 	protected String room;
 	protected int state;
@@ -73,7 +73,7 @@ public class Thermostat {
 	
 	public int getCurrentTemperature() {
 		
-		return this.currentTemperature;
+		return this.currentTemp;
 	}
 	
 	public boolean isLocked() {
@@ -84,6 +84,6 @@ public class Thermostat {
 	public String toString() {
 		
 		return "Thermostat id: " + this.id + ", name: " + this.name + ", state: " + this.state + 
-				" temp: " + this.currentTemperature + " (" + this.minTemp + " - " + this.maxTemp + ")"; 
+				" temp: " + this.currentTemp + " (" + this.minTemp + " - " + this.maxTemp + ")"; 
 	}
 }

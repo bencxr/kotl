@@ -22,9 +22,13 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	
+	public static final String BASE_URL = "http://home.isidorechan.com";
+	
 	SwitchListAdapter adapter;
 	
 	private static MainActivity singleton;
+
+	private boolean mIsInForegroundMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +50,26 @@ public class MainActivity extends Activity {
         switchListView.setAdapter(adapter);
     }
     
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mIsInForegroundMode = false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mIsInForegroundMode = true;
+    }
+    
     // Returns the application instance 
     public static MainActivity getInstance() {
         return singleton;
+    }
+    
+    // Some function.
+    public boolean isInForeground() {
+        return mIsInForegroundMode;
     }
     
     public void clickHandler(View view) {

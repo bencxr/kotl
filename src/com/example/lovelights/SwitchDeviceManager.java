@@ -1,5 +1,6 @@
 package com.example.lovelights;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -179,9 +180,12 @@ public class SwitchDeviceManager extends Thread implements List<SwitchDevice> {
 	public void run() {
 		
 		while (true) {
-			getLights();
 			try {
-				Thread.sleep(10000);
+				if (activity.isInForeground()) {
+					getLights();
+					Thread.sleep(500);
+				}
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 			}
 		}

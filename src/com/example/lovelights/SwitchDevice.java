@@ -23,7 +23,7 @@ import android.widget.Switch;
 
 public class SwitchDevice {
 	
-	public static final String BASE_SWITCH_URL = "http://home.isidorechan.com/lights";
+	public static final String BASE_SWITCH_URL = MainActivity.BASE_URL + "/lights";
 
 	private int id;
 	private String name = "Switch";
