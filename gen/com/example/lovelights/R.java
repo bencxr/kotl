@@ -1076,7 +1076,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int RelativeLayout01=0x7f05003d;
-        public static final int RelativeLayout02=0x7f050045;
+        public static final int RelativeLayout02=0x7f050046;
         public static final int action_bar=0x7f05001c;
         public static final int action_bar_activity_content=0x7f050015;
         public static final int action_bar_container=0x7f05001b;
@@ -1111,9 +1111,9 @@ containing a value of this type.
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
         public static final int loadStateButton=0x7f05003f;
-        public static final int maxTempTextView=0x7f05004b;
+        public static final int maxTempTextView=0x7f05004c;
         public static final int middle=0x7f050012;
-        public static final int minTempTextView=0x7f050048;
+        public static final int minTempTextView=0x7f050049;
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
@@ -1123,8 +1123,9 @@ containing a value of this type.
         public static final int radioButton1=0x7f050042;
         public static final int radioButton2=0x7f050043;
         public static final int radioButton3=0x7f050044;
+        public static final int radioButton4=0x7f050045;
         public static final int radioState=0x7f050041;
-        public static final int rangeSeekLayout=0x7f050049;
+        public static final int rangeSeekLayout=0x7f05004a;
         public static final int saveStateButton=0x7f050040;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;
@@ -1136,20 +1137,20 @@ containing a value of this type.
         public static final int search_plate=0x7f050036;
         public static final int search_src_text=0x7f050037;
         public static final int search_voice_btn=0x7f05003b;
-        public static final int seekBar=0x7f05004a;
-        public static final int setTemperatureLabel=0x7f050047;
+        public static final int seekBar=0x7f05004b;
+        public static final int setTemperatureLabel=0x7f050048;
         public static final int shortcut=0x7f05002e;
         public static final int showCustom=0x7f050007;
         public static final int showHome=0x7f050004;
         public static final int showTitle=0x7f050006;
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
-        public static final int switchListView=0x7f05004d;
-        public static final int switch_button=0x7f05004e;
-        public static final int switch_name=0x7f05004f;
-        public static final int switchesLabel=0x7f05004c;
+        public static final int switchListView=0x7f05004e;
+        public static final int switch_button=0x7f05004f;
+        public static final int switch_name=0x7f050050;
+        public static final int switchesLabel=0x7f05004d;
         public static final int tabMode=0x7f050002;
-        public static final int temperatureLabel=0x7f050046;
+        public static final int temperatureLabel=0x7f050047;
         public static final int title=0x7f05002b;
         public static final int top_action_bar=0x7f050020;
         public static final int up=0x7f050021;

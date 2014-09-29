@@ -29,7 +29,10 @@ local.properties
 .buildpath
 
 # java 
-.class
+*.class
+
+bin/
+
 
 #################
 ## Visual Studio
@@ -215,3 +218,7 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+bin/*
+*.class
+bin/classes/com/example/lovelights/SwitchListAdapter.class
